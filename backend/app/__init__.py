@@ -48,6 +48,8 @@ def before_request():
     if rp != '/' and rp.endswith('/'):
         return redirect(rp[:-1])
 
+    g.MIDTRANS_SERVER_KEY = app.config.get('MIDTRANS_SERVER_KEY')
+
 
 @app.after_request
 def after_request(response):
@@ -86,4 +88,4 @@ jwt.revoked_token_loader(revoked_token_callback)
 
 @app.errorhandler(Exception)
 def error_handler(err):
-    return response_error(err.message)
+    return response_error(str(err))

@@ -23,6 +23,7 @@ class BaseConfig(object):
     REDIS_PORT = 6379
     CELERY_BROKER_URL = 'redis://%s:%s/0' % (REDIS_HOST, REDIS_PORT)
     CELERY_RESULT_BACKEND = 'redis://%s:%s/0' % (REDIS_HOST, REDIS_PORT)
+    MIDTRANS_SERVER_KEY = ''
 
 
 class DevelopmentConfig(BaseConfig):
