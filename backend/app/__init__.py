@@ -49,6 +49,8 @@ def before_request():
         return redirect(rp[:-1])
 
     g.MIDTRANS_SERVER_KEY = app.config.get('MIDTRANS_SERVER_KEY')
+    g.MIDTRANS_CLIENT_KEY = app.config.get('MIDTRANS_CLIENT_KEY')
+    g.ENV = app.config.get('ENV')
 
 
 @app.after_request

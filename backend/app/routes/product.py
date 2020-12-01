@@ -59,15 +59,16 @@ def purchase():
         # Create Snap API instance
         snap = midtransclient.Snap(
             # Set to true if you want Production Environment (accept real transaction).
-            is_production=False,
-            server_key=g.MIDTRANS_SERVER_KEY
+            is_production=False if g.ENV == 'DEV' else True,
+            server_key=g.MIDTRANS_SERVER_KEY,
+            client_key=g.MIDTRANS_CLIENT_KEY
         )
         # Build API parameter
         param = {
             "transaction_details": {
                 "order_id": order_id,
                 "gross_amount": gross_amount
-            }
+            },
         }
 
         transaction = snap.create_transaction(param)
