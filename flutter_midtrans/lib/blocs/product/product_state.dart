@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_midtrans/data/models/product.dart';
 
 class ProductState extends Equatable {
   final List<Object> props;
@@ -9,6 +10,19 @@ class ProductState extends Equatable {
 class ProductInitial extends ProductState {
   @override
   String toString() => 'ProductInitial';
+}
+
+class ProductLoading extends ProductState {
+  @override
+  String toString() => 'ProductLoading';
+}
+
+class ProductLoadedSuccess extends ProductState {
+  final List<Product> products;
+  ProductLoadedSuccess({@required this.products}) : super([products]);
+
+  @override
+  String toString() => 'ProductLoadedSuccess';
 }
 
 class ProductFailure extends ProductState {

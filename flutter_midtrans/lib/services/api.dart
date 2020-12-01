@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_midtrans/config/config.dart';
+import 'package:flutter_midtrans/data/models/product.dart';
 import 'package:flutter_midtrans/helpers/api_response.dart';
 import 'package:flutter_midtrans/helpers/error_codes.dart';
 import 'package:flutter_midtrans/helpers/logger/tokoin_log.dart';
 
 abstract class BaseAPI {
   Dio _dio;
-  List<Function> _onErrorCallbacks = [];
 
   _logging() {
     return InterceptorsWrapper(onRequest: (RequestOptions options) async {
@@ -33,35 +33,25 @@ abstract class BaseAPI {
     });
   }
 
-  void addErrorInterceptor(callback) {
-    _onErrorCallbacks.add(callback);
-  }
-
   void notifyErrorCallbacks(Exception error) {
-    _onErrorCallbacks.forEach((callback) {
-      callback(error);
-      if (error is DioError) {
-        if (error.response?.statusCode == HttpStatus.badRequest ||
-            error.response?.statusCode == HttpStatus.internalServerError) {
-          var data = error.response?.data;
-          int errorCode = -1;
-          try {
-            errorCode = data['errorCode'];
-          } catch (e) {
-            log.i(e.toString());
-          }
-          if (ErrorCodes.errorCodes.containsKey(errorCode)) throw APIErrorWithCode(errorCode);
-          throw APIErrorWithCode(-1);
+    if (error is DioError) {
+      if (error.response?.statusCode == HttpStatus.badRequest ||
+          error.response?.statusCode == HttpStatus.internalServerError) {
+        var data = error.response?.data;
+        int errorCode = -1;
+        try {
+          errorCode = data['code'];
+        } catch (e) {
+          log.i(e.toString());
         }
+        if (ErrorCodes.errorCodes.containsKey(errorCode)) throw APIErrorWithCode(errorCode);
+        throw APIErrorWithCode(-1);
       }
-    });
+    }
   }
-}
 
-class _ContentType {
-  static const JSON = 'application/json';
-  static const FORM_URL_ENCODED = 'application/x-www-form-urlencoded';
-  static const FORM_DATA = 'multipart/form-data';
+  Future<Response> loadProducts();
+  Future<Response> purchase(Product product);
 }
 
 class API extends BaseAPI {
@@ -81,20 +71,12 @@ class API extends BaseAPI {
     _dio.interceptors.add(_logging());
   }
 
-  _addContentTypeHeader({contentType: _ContentType.JSON}) {
-    switch (contentType) {
-      case (_ContentType.JSON):
-        _dio.options.headers['Content-Type'] = _ContentType.JSON;
-        return;
-      case (_ContentType.FORM_URL_ENCODED):
-        _dio.options.headers['Content-Type'] = _ContentType.FORM_URL_ENCODED;
-        return;
-      case (_ContentType.FORM_DATA):
-        if (_dio.options.headers.containsKey('Content-Type')) _dio.options.headers.remove('Content-Type');
-        return;
-      default:
-        return;
-    }
+  Future<Response> loadProducts() async {
+    return await _dio.get("/product");
+  }
+
+  Future<Response> purchase(Product product) async {
+    return await _dio.post("/purchase", data: product.toMap());
   }
 }
 

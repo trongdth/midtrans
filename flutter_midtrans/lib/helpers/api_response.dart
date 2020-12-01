@@ -7,31 +7,9 @@ Future<APIResponse> handleResponse(Future<Response> request) async {
     if (response == null) return APIResponse(success: false);
 
     var data = response.data;
-    if (response.headers.value('content-type') == 'text/csv') {
-      return APIResponse(success: true, data: data);
-    }
-    var success = data != null && data["status"] == "SUCCESS";
+    var success = data != null && data["status"] == 1;
     return APIResponse(success: success, data: data);
   } on DioError catch (error) {
-    if (error is DioError) {
-      var errorCode;
-      if (error?.error != null && error.error is APIErrorWithCode) {
-        errorCode = error.error.errorCode;
-      } else if (error.response != null && error.response.data != null && error.response?.data is Map) {
-        errorCode = error.response?.data["errorCode"];
-      } else {
-        throw error;
-      }
-
-      var serverMessage;
-      if (error.response?.data != null) {
-        serverMessage = error.response.data["displayMessage"] ?? error.message;
-      }
-
-      if (errorCode == null) throw APIUnknownError(serverMessage);
-      throw APIErrorWithCode(errorCode, defaultMessage: serverMessage);
-    }
-
     throw error;
   }
 }

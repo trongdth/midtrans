@@ -4,7 +4,7 @@ import 'themes.dart';
 
 final lightTheme = Themes(
     colors: Colours(
-        appBar: Color(0xFF4D4084),
+        appBar: Color(0xFFFFFFFF),
         border: Color(0xFFD8D8D8),
         bottomBar: Color(0xFFFFFFFF),
         modelSheet: Color(0xFFFFFFF),
@@ -15,12 +15,10 @@ final lightTheme = Themes(
         button2: Color(0xFF000000),
         button1: Color(0xFF4D4084),
         button4: Color(0xFFF0F0F0),
-        primary: Color(0xFF4D4084),
+        primary: Color(0xFF000000),
         background: Color(0xFFFFFFFF),
-        background2: Color(0xFFF2F2F2),
-        background3: Color(0xFFC4B5F7),
         selectedItemBackground: Color(0x274D4084),
-        text1: Color(0xFF383838),
+        text1: Color(0x274D4084),
         text2: Color(0xFF21409A),
         text3: Color(0xFF4D4084),
         text4: Color(0xC98D8D8D),

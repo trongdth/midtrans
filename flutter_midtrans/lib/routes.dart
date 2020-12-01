@@ -27,8 +27,9 @@ class Routes extends StatelessWidget {
             accentColor: theme.colors.primary,
             buttonColor: theme.colors.primary,
             bottomAppBarColor: theme.colors.primary,
+            fontFamily: 'Georgia',
             bottomSheetTheme: BottomSheetThemeData(
-              backgroundColor: App.theme.colors.bottomBar,
+              backgroundColor: theme.colors.bottomBar,
               elevation: 5,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -36,7 +37,7 @@ class Routes extends StatelessWidget {
             ),
             appBarTheme: AppBarTheme(
               color: theme.colors.appBar,
-              elevation: .5,
+              elevation: 0,
             ),
             unselectedWidgetColor: theme.colors.button3,
             // for checkbox

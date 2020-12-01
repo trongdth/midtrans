@@ -14,7 +14,7 @@ class ScreenRouter {
 
   ScreenRouter() {
     api = API();
-    productRepo = ProductRepository();
+    productRepo = ProductRepository(api: api);
   }
 
   Route<dynamic> generateRoute(RouteSettings settings) {
