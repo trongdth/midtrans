@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 20, left: 90, right: 20),
               child: ButtonWidget(
-                onPressed: () => print('1'),
+                onPressed: () => _productCubit.purchase(product),
                 title: 'BUY NOW',
               ),
             )
@@ -85,11 +85,44 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Row(
         children: [
           Expanded(
-            child: Image(
-              image: AssetImage('assets/${product.productImageName}.png'),
+            flex: 2,
+            child: Align(
+              alignment: Alignment.center,
+              child: Image(
+                image: AssetImage('assets/${product.productImageName}.png'),
+              ),
             ),
           ),
-          Expanded(child: Text(product.productName)),
+          Expanded(
+            flex: 5,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    product.productName,
+                    textAlign: TextAlign.left,
+                    style: App.theme.styles.body2,
+                  ),
+                  Text(
+                    product.productDesc,
+                    textAlign: TextAlign.left,
+                    style: App.theme.styles.body3,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: ButtonWidget(
+              title: 'Buy Now',
+              onPressed: () => _productCubit.purchase(product),
+              textStyle: App.theme.styles.body3.copyWith(color: Colors.white),
+            ),
+          )
         ],
       ),
     );

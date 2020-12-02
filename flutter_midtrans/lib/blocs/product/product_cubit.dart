@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_midtrans/blocs/product/product_state.dart';
+import 'package:flutter_midtrans/data/models/product.dart';
 import 'package:flutter_midtrans/repositories/product_repo.dart';
 
 class ProductCubit extends Cubit<ProductState> {
@@ -13,7 +14,7 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ProductLoadedSuccess(products: products.products));
   }
 
-  Future<void> purchase() async {
+  Future<void> purchase(Product product) async {
     emit(ProductLoading());
   }
 }

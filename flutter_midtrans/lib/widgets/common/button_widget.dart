@@ -6,7 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 const DEFAULT_HEIGHT = 40.0;
 const DEFAULT_BORDER_WIDTH = 1.0;
 const DEFAULT_MARGIN = const EdgeInsets.symmetric(horizontal: 0);
-const DEFAULT_PADDING = 35.0;
+const DEFAULT_PADDING = 15.0;
 
 enum ButtonType { blue_filled, red_filled, blue_border, white_border, transparent, transparent_danger, small_link }
 
