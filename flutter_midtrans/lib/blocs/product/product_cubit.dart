@@ -13,5 +13,7 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ProductLoadedSuccess(products: products.products));
   }
 
-  purchase() {}
+  Future<void> purchase() async {
+    emit(ProductLoading());
+  }
 }

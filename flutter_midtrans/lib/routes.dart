@@ -28,6 +28,7 @@ class Routes extends StatelessWidget {
             buttonColor: theme.colors.primary,
             bottomAppBarColor: theme.colors.primary,
             fontFamily: 'Georgia',
+            scaffoldBackgroundColor: theme.colors.background,
             bottomSheetTheme: BottomSheetThemeData(
               backgroundColor: theme.colors.bottomBar,
               elevation: 5,
@@ -37,6 +38,7 @@ class Routes extends StatelessWidget {
             ),
             appBarTheme: AppBarTheme(
               color: theme.colors.appBar,
+              iconTheme: IconThemeData(color: theme.colors.primary),
               elevation: 0,
             ),
             unselectedWidgetColor: theme.colors.button3,
