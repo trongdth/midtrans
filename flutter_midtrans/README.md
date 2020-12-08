@@ -2,6 +2,12 @@
 
 A new Flutter project.
 
+
+## How to run
+
+- replace `MIDTRANS_CLIENT_KEY` with your current key in lib/config/config.dart
+- flutter run
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
