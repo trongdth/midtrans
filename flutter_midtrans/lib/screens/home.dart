@@ -4,6 +4,7 @@ import 'package:flutter_midtrans/blocs/product/product_state.dart';
 import 'package:flutter_midtrans/config/config.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_midtrans/data/models/product.dart';
+import 'package:flutter_midtrans/screen_router.dart';
 import 'package:flutter_midtrans/widgets/common/button_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -148,6 +149,12 @@ class _HomeScreenState extends State<HomeScreen> {
           listener: (context, state) {
             if (state is ProductLoadedSuccess) {
               _products = state.products;
+            }
+
+            if (state is ProductCreateOrderSuccess) {
+              Navigator.pushNamed(context, ScreenRouter.SNAP, arguments: <String, dynamic>{
+                ScreenRouter.ARG_TRANSACTION_TOKEN: state.transactionToken,
+              });
             }
           },
           child: BlocBuilder<ProductCubit, ProductState>(builder: (context, state) {

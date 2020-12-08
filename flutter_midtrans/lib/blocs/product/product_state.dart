@@ -25,6 +25,14 @@ class ProductLoadedSuccess extends ProductState {
   String toString() => 'ProductLoadedSuccess';
 }
 
+class ProductCreateOrderSuccess extends ProductState {
+  final String transactionToken;
+  ProductCreateOrderSuccess({@required this.transactionToken}) : super([transactionToken]);
+
+  @override
+  String toString() => 'ProductCreateOrderSuccess';
+}
+
 class ProductFailure extends ProductState {
   final String error;
   ProductFailure({@required this.error}) : super([error]);

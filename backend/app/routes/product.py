@@ -50,11 +50,8 @@ def purchase():
         if data is None:
             return response_error(MESSAGE.INVALID_PARAMETER, CODE.INVALID_PARAMETER)
 
-        order_id = 'order_{}_{}'.format(data['product_id'], time.time())
-        gross_amount = data['gross_amount']
-
-        print('order_id = {}, gross_amount = {}, midtrans_key = {}'.format(
-            order_id, gross_amount, g.MIDTRANS_SERVER_KEY))
+        order_id = 'order_{}_{}'.format(data['id'], time.time())
+        gross_amount = data['price']
 
         # Create Snap API instance
         snap = midtransclient.Snap(

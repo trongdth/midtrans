@@ -3,11 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_midtrans/blocs/product/product_cubit.dart';
 import 'package:flutter_midtrans/repositories/product_repo.dart';
 import 'package:flutter_midtrans/root.dart';
+import 'package:flutter_midtrans/screens/snap.dart';
 import 'package:flutter_midtrans/services/api.dart';
 import 'package:flutter_midtrans/widgets/common/button_widget.dart';
 
 class ScreenRouter {
   static const ROOT = '/';
+  static const SNAP = '/snap';
+
+  static const ARG_TRANSACTION_TOKEN = 'ARG_TRANSACTION_TOKEN';
 
   BaseAPI api;
   var productRepo;
@@ -24,6 +28,10 @@ class ScreenRouter {
     switch (settings.name) {
       case ROOT:
         return route(Root());
+      case SNAP:
+        return route(SnapScreen(
+          transactionToken: arguments[ARG_TRANSACTION_TOKEN],
+        ));
       default:
         return unknownRoute(settings);
     }

@@ -15,4 +15,10 @@ class ProductRepository {
     if (!response.success) return null;
     return ListProductResponse.fromMap(response.data);
   }
+
+  Future<BaseResponse> buyProduct({product}) async {
+    var response = await handleResponse(api.purchase(product));
+    if (!response.success) return null;
+    return BaseResponse(response.data);
+  }
 }

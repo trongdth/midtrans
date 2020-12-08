@@ -16,5 +16,7 @@ class ProductCubit extends Cubit<ProductState> {
 
   Future<void> purchase(Product product) async {
     emit(ProductLoading());
+    var response = await productRepo.buyProduct(product: product);
+    emit(ProductCreateOrderSuccess(transactionToken: response.data));
   }
 }

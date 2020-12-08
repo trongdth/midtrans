@@ -76,7 +76,7 @@ class API extends BaseAPI {
   }
 
   Future<Response> purchase(Product product) async {
-    return await _dio.post("/purchase", data: product.toMap());
+    return await _dio.post("/product/purchase", data: product.toMap());
   }
 }
 
